@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 const {FloatProperty} = require('../../../src/models/properties');
+const {ValidationError} = require('../../../src/exceptions');
 
 // Basic Behavior
 test('expected type succeeds', () => {
@@ -13,22 +14,21 @@ test('expected type succeeds', () => {
   expect(prop.validate('0.0')).toBe(0);
   expect(prop.validate('-1.0')).toBe(-1);
   expect(prop.validate('999')).toBe(999);
-  
+
   expect(prop.validate(null)).toBe(null); // base string
 });
-
 
 test('validation throws error on unexpected type', () => {
   let prop = FloatProperty();
 
   expect(() => {
     prop.validate('asdf'); // String
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 
   // Array of ints - repeated not true
   expect(() => {
     prop.validate([612, 715]);
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('validation throws error on unsafe values', () => {
@@ -36,9 +36,8 @@ test('validation throws error on unsafe values', () => {
 
   expect(() => {
     prop.validate('4029384203948203948923'); // Too Large of int
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
-
 
 // Custom Validator
 test('custom validator is consumed', () => {
@@ -47,7 +46,7 @@ test('custom validator is consumed', () => {
 
   expect(() => {
     prop.validate(-1);
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('custom validator is validates default', () => {
@@ -55,9 +54,8 @@ test('custom validator is validates default', () => {
 
   expect(() => {
     FloatProperty({validator: validator, default:-1});
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
-
 
 // Repeated Properties
 test('repeated properties have expected implicit default', () => {
@@ -65,18 +63,15 @@ test('repeated properties have expected implicit default', () => {
   expect(prop.default()).toEqual([]);
 });
 
-
 test('repeated properties have expected explicit default', () => {
   let prop = FloatProperty({repeated:true, default: ['612', '715']});
   expect(prop.default()).toEqual([612, 715]);
 });
 
-
 test('repeated properties pass validation', () => {
   let prop = FloatProperty({repeated:true});
   expect(prop.validate(['612', '715'])).toEqual([612, 715]);
 });
-
 
 test('repeated properties pass custom validation', () => {
   let validator = Joi.number().min(3);
@@ -89,7 +84,7 @@ test('repeated properties error on custom validation of default', () => {
 
   expect(() => {
     FloatProperty({repeated:true, validator: validator, default: [1, 2]});
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('repeated properties error on custom validation', () => {
@@ -98,7 +93,7 @@ test('repeated properties error on custom validation', () => {
 
   expect(() => {
     prop.validate([1, 2]);
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('repeated properties validates empty list', () => {

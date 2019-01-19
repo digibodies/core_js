@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 const {IntegerProperty} = require('../../../src/models/properties');
+const {ValidationError} = require('../../../src/exceptions');
 
 // Basic Behavior
 test('expected type succeeds', () => {
@@ -22,17 +23,16 @@ test('validation throws error on unexpected type', () => {
 
   expect(() => {
     prop.validate('asdf'); // String
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 
   expect(() => {
     prop.validate(3.14); // Float
-  }).toThrow(TypeError);
-
+  }).toThrow(ValidationError);
 
   // Array of ints - repeated not true
   expect(() => {
     prop.validate([612, 715]);
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('validation throws error on unsafe values', () => {
@@ -40,9 +40,8 @@ test('validation throws error on unsafe values', () => {
 
   expect(() => {
     prop.validate('4029384203948203948923'); // Too Large of int
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
-
 
 // Custom Validator
 test('custom validator is consumed', () => {
@@ -51,7 +50,7 @@ test('custom validator is consumed', () => {
 
   expect(() => {
     prop.validate(-1);
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('custom validator is validates default', () => {
@@ -59,9 +58,8 @@ test('custom validator is validates default', () => {
 
   expect(() => {
     IntegerProperty({validator: validator, default:-1});
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
-
 
 // Repeated Properties
 test('repeated properties have expected implicit default', () => {
@@ -90,7 +88,7 @@ test('repeated properties error on custom validation of default', () => {
 
   expect(() => {
     IntegerProperty({repeated:true, validator: validator, default: [1, 2]});
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('repeated properties error on custom validation', () => {
@@ -99,7 +97,7 @@ test('repeated properties error on custom validation', () => {
 
   expect(() => {
     prop.validate([1, 2]);
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('repeated properties validates empty list', () => {

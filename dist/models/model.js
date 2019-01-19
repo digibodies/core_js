@@ -52,7 +52,7 @@ var model = function model(kind, schema) {
           val = _ref4[1];
 
       if (!m._properties[key]) {
-        throw new Error(key + ' is an unknown property');
+        throw new Error('Unknown property `' + key + '` of model ' + kind);
       }
       m[key] = val;
     });

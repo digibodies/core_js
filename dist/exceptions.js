@@ -79,9 +79,27 @@ var ConflictException = function (_Error4) {
   return ConflictException;
 }(Error);
 
+/*
+Internal Exception thrown when a model property fails to be validated, etc.
+*/
+
+
+var ValidationError = function (_Error5) {
+  _inherits(ValidationError, _Error5);
+
+  function ValidationError() {
+    _classCallCheck(this, ValidationError);
+
+    return _possibleConstructorReturn(this, (ValidationError.__proto__ || Object.getPrototypeOf(ValidationError)).apply(this, arguments));
+  }
+
+  return ValidationError;
+}(Error);
+
 module.exports = {
   PermissionException: PermissionException,
   AuthenticationException: AuthenticationException,
   DoesNotExistException: DoesNotExistException,
-  ConflictException: ConflictException
+  ConflictException: ConflictException,
+  ValidationError: ValidationError
 };

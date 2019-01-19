@@ -33,7 +33,7 @@ const model = (kind, schema) => {
     // Populate initial values - this also validates them
     Object.entries(initialValues).forEach(([key, val]) => {
       if (!m._properties[key]) {
-        throw new Error(key + ' is an unknown property');
+        throw new Error('Unknown property `' + key + '` of model ' + kind);
       }
       m[key] = val;
     });

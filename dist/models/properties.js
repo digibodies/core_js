@@ -48,7 +48,7 @@ var Property = function () {
           value = _Joi$validate.value;
 
       if (error) {
-        throw new TypeError(error); // TODO: shape this better...
+        throw new ValidationError(error);
       }
 
       return value;

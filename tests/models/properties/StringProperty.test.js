@@ -2,6 +2,7 @@
 
 const Joi = require('joi');
 const {StringProperty} = require('../../../src/models/properties');
+const {ValidationError} = require('../../../src/exceptions');
 
 // Basic Behavior
 test('expected type succeeds', () => {
@@ -17,12 +18,12 @@ test('validation throws error on unexpected type', () => {
 
   expect(() => {
     prop.validate(612); // Number
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 
   // Array of Strings - repeated not true
   expect(() => {
     prop.validate(['612', '715']);
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 // Custom Validator
@@ -32,7 +33,7 @@ test('custom validator is consumed', () => {
 
   expect(() => {
     prop.validate('6');
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('custom validator is validates default', () => {
@@ -40,7 +41,7 @@ test('custom validator is validates default', () => {
 
   expect(() => {
     StringProperty({validator: validator, default:'6'});
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 // Repeated Properties
@@ -70,7 +71,7 @@ test('repeated properties error on custom validation of default', () => {
 
   expect(() => {
     StringProperty({repeated:true, validator: validator, default: ['a', 'b']});
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('repeated properties error on custom validation', () => {
@@ -79,7 +80,7 @@ test('repeated properties error on custom validation', () => {
 
   expect(() => {
     prop.validate(['a', 'b']);
-  }).toThrow(TypeError);
+  }).toThrow(ValidationError);
 });
 
 test('repeated properties empty list validates', () => {

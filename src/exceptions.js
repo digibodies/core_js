@@ -25,9 +25,15 @@ Any HTTP handler catching this error should set a 409 response code
 */
 class ConflictException extends Error {}
 
+/*
+Internal Exception thrown when a model property fails to be validated, etc.
+*/
+class ValidationError extends Error {}
+
 module.exports = {
   PermissionException,
   AuthenticationException,
   DoesNotExistException,
-  ConflictException
+  ConflictException,
+  ValidationError
 };

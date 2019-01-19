@@ -1,5 +1,6 @@
 // Model Properties
 const Joi = require('joi');
+const {ValidationError} = require('../exceptions');
 
 class Property {
   constructor(kwargs) {
@@ -31,7 +32,7 @@ class Property {
     let {error, value } = Joi.validate(val, validator);
 
     if (error) {
-      throw new TypeError(error); // TODO: shape this better...
+      throw new ValidationError(error);
     }
 
     return value;
