@@ -13,7 +13,7 @@ test('expected type succeeds', () => {
   expect(prop.validate('0.0')).toBe(0);
   expect(prop.validate('-1.0')).toBe(-1);
   expect(prop.validate('999')).toBe(999);
-
+  
   expect(prop.validate(null)).toBe(null); // base string
 });
 

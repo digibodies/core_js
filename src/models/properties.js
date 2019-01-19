@@ -44,7 +44,8 @@ const BooleanProperty = (kwargs={}) => {
 };
 
 const DateTimeProperty = (kwargs={}) => {
-  kwargs['validator'] = kwargs['validator'] || Joi.date();
+  // use of strict below prevents ints and date strings
+  kwargs['validator'] = kwargs['validator'] || Joi.date().strict(true);
   return new Property(kwargs);
 };
 

@@ -68,7 +68,8 @@ var BooleanProperty = function BooleanProperty() {
 var DateTimeProperty = function DateTimeProperty() {
   var kwargs = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  kwargs['validator'] = kwargs['validator'] || Joi.date();
+  // use of strict below prevents ints and date strings
+  kwargs['validator'] = kwargs['validator'] || Joi.date().strict(true);
   return new Property(kwargs);
 };
 
