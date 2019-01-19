@@ -1,4 +1,4 @@
-// Core Libary of Exception/Error Classes
+// Core Library of Exception/Error Classes
 
 /*
 Internal Exception when permission to an object cannot be granted
