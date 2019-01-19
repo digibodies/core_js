@@ -1,4 +1,4 @@
-const exceptions = require('../core/exceptions');
+const exceptions = require('../src/exceptions');
 
 test('PermissionException contains message', () => {
   const msg = 'You do not have permission to this resource.';

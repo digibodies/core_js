@@ -1,9 +1,11 @@
 {
-  "name": "core_js",
+  "name": "core",
   "version": "0.0.1",
   "description": "Javascript implementation of Core library",
   "main": "index.js",
   "scripts": {
+    "build": "rm -rf dist && NODE_ENV=production babel src --out-dir dist",
+    "lint": "eslint .",
     "test": "jest"
   },
   "repository": {
@@ -17,8 +19,12 @@
   },
   "homepage": "https://github.com/digibodies/core_js#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "eslint": "^5.9.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "joi": "^14.3.1"
   }
 }
