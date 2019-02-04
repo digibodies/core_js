@@ -8,7 +8,7 @@ const model = (kind, schema) => {
     if (!initialValues) { initialValues = {};}
     schema.id = StringProperty(); // id property is implicit
 
-    let m = { _properties: {}, _values: {}};
+    let m = { _properties: {}, _values: {}, _kind: kind};
 
     Object.entries(schema).forEach(([key, prop]) => {
       // Collect Properties
@@ -27,6 +27,7 @@ const model = (kind, schema) => {
       });
     });
 
+    Object.defineProperty(m, 'kind', { get: () => m._kind});
     Object.defineProperty(m, 'values', { get: () => m._values});
     Object.defineProperty(m, 'properties', { get: () => m._properties});
 

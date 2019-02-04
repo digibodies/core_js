@@ -15,7 +15,7 @@ var model = function model(kind, schema) {
     }
     schema.id = StringProperty(); // id property is implicit
 
-    var m = { _properties: {}, _values: {} };
+    var m = { _properties: {}, _values: {}, _kind: kind };
 
     Object.entries(schema).forEach(function (_ref) {
       var _ref2 = _slicedToArray(_ref, 2),
@@ -38,6 +38,9 @@ var model = function model(kind, schema) {
       });
     });
 
+    Object.defineProperty(m, 'kind', { get: function get() {
+        return m._kind;
+      } });
     Object.defineProperty(m, 'values', { get: function get() {
         return m._values;
       } });

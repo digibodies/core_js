@@ -7,6 +7,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // Model Properties
 var Joi = require('joi');
 
+var _require = require('../exceptions'),
+    ValidationError = _require.ValidationError;
+
 var Property = function () {
   function Property(kwargs) {
     _classCallCheck(this, Property);

@@ -25,8 +25,13 @@ test('different instances have different values', () => {
   m3.givenName = 'Rick';
   m3.familyName = 'Sanchez';
 
-  // TODO: This should fail
+  // TODO: This should fail since it doesn't exist
   m1.total_members = 400;
+
+
+  expect(m1.kind).toEqual('JunkDrawer');
+  expect(m2.kind).toEqual('JunkDrawer');
+  expect(m3.kind).toEqual('JunkDrawer');
 
   expect(m1.fav_foods).toEqual(['kale', 'seabass']);
   expect(m2.fav_foods).toEqual(['pizza', 'burgers']);
