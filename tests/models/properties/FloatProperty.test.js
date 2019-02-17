@@ -1,3 +1,4 @@
+/* eslint-env jest */
 // Basic property tests
 
 const Joi = require('joi');
@@ -89,7 +90,7 @@ test('repeated properties error on custom validation of default', () => {
 
 test('repeated properties error on custom validation', () => {
   let validator = Joi.number().min(3);
-  let prop = FloatProperty({repeated:true, validator: validator, default: [612, 715]});;
+  let prop = FloatProperty({repeated:true, validator: validator, default: [612, 715]});
 
   expect(() => {
     prop.validate([1, 2]);

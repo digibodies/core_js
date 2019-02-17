@@ -1,3 +1,4 @@
+/* eslint-env jest */
 // Basic property tests
 
 const {BooleanProperty} = require('../../../src/models/properties');
