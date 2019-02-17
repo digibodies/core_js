@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 const models = require('../../src/models');
 const Joi = require('joi');
 const {ValidationError} = require('../../src/exceptions');

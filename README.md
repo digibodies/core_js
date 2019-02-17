@@ -1,5 +1,5 @@
 # core_js
-Simple build blocks for study architecture.
+Simple building blocks for study architecture.
 
 What is in this package:
  - A simple set of Exception types
